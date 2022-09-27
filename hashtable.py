@@ -1,10 +1,27 @@
-#Assignment:  Linear Probing
+#Assignment:  
 
 class HashTable:
     
     def __init__(self, m):
         self.m = m
         self.hashtable = self.create_hash_table()
+        
+    #Linear Probing   
+    def liner_probing(self,val,line_hash_table):
+        index = val % len(line_hash_table)       
+        while True:    
+            if line_hash_table[index] == "0":            
+                line_hash_table[index] = val
+                break
+            else:
+                index = (index+1)%len(line_hash_table)                
+    #Linear Probing        
+    def create_liner_probing(self):
+        arr = [30,46,21,8,44,97,14,210,66]
+        line_hash_table = ["0"]*15        
+        for i in range(len(arr)):
+            self.liner_probing(arr[i],line_hash_table)
+        print(f"liner probing:{line_hash_table}")
     
     def create_hash_table(self):
         return [ [] for _ in range(self.m) ]
@@ -93,3 +110,5 @@ found, _, val = ht.search(12)
 print(found, val)
 ht.delete(3)
 ht.delete(5)
+#Linear Probing
+ht.create_liner_probing()
